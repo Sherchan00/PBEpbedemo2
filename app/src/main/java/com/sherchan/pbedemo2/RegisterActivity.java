@@ -12,8 +12,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.EditText;
-import android.util.Log;
-import android.content.ContentValues;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,9 +19,12 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.AuthResult;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import androidx.annotation.NonNull;
 
-import java.util.regex.Pattern;
+import java.util.HashMap;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -111,8 +112,31 @@ public class RegisterActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             progressDialog.dismiss();
                             FirebaseUser user = mAuth.getCurrentUser();
+
+                            String email = user.getEmail();
+                            String uid = user.getUid();
+
+                            //using HashMap
+                            HashMap<Object, String> hashMap = new HashMap<>();
+
+                            //put info in hashmap
+                            hashMap.put("email", email);
+                            hashMap.put("uid", uid);
+                            hashMap.put("name", ""); //add later
+                            hashMap.put("phone", ""); //add later
+                            hashMap.put("image", ""); //add later
+
+                            //firebase database instance
+                            FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+                            //path to stoe user data named "Users"
+                            DatabaseReference reference = database.getReference("Users");
+
+                            //put data with hashmap in database
+                            reference.child(uid).setValue(hashMap);
+
                             Toast.makeText(RegisterActivity.this, "Registered..\n"+user.getEmail(), Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(RegisterActivity.this, ProfileActivity.class));
+                            startActivity(new Intent(RegisterActivity.this, DashBoardActivity.class));
                         } else {
                             // If sign in fails, display a message to the user.
                             progressDialog.dismiss();

@@ -12,8 +12,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.EditText;
-import android.util.Log;
-import android.content.ContentValues;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,6 +19,11 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.AuthResult;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+
 import androidx.annotation.NonNull;
 
 public class LoginActivity extends AppCompatActivity {
@@ -97,7 +100,30 @@ public class LoginActivity extends AppCompatActivity {
                             pd.dismiss();
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
-                            startActivity(new Intent(LoginActivity.this, ProfileActivity.class));
+
+                            //get iser email and uid from auth
+                            String email = user.getEmail();
+                            String uid = user.getUid();
+
+                            //using HashMap
+                            HashMap<Object, String> hashMap = new HashMap<>();
+
+                            //put info in hashmap
+                            hashMap.put("email", email);
+                            hashMap.put("uid", uid);
+                            hashMap.put("name", ""); //add later
+                            hashMap.put("phone", ""); //add later
+                            hashMap.put("image", ""); //add later
+
+                            //firebase database instance
+                            FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+                            //path to stoe user data named "Users"
+                            DatabaseReference reference = database.getReference("Users");
+
+                            //put data with hashmap in database
+                            reference.child(uid).setValue(hashMap);
+                            startActivity(new Intent(LoginActivity.this, DashBoardActivity.class));
                             finish();
                         } else {
                             // If sign in fails, display a message to the user.
