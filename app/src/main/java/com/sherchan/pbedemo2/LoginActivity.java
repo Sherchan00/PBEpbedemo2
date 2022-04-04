@@ -106,9 +106,9 @@ public class LoginActivity extends AppCompatActivity {
                                 //get iser email and uid from auth
                                 String email = user.getEmail();
                                 String uid = user.getUid();
-                                String name = user.getDisplayName();
-                                String phone = user.getPhoneNumber();
-                                String emergency = user.getPhoneNumber();
+                               // String name = user.getDisplayName();
+                               // String phone = user.getPhoneNumber();
+                               // String emergency = user.getPhoneNumber();
 
                                 //using HashMap
                                 HashMap<Object, String> hashMap = new HashMap<>();
@@ -116,10 +116,11 @@ public class LoginActivity extends AppCompatActivity {
                                 //put info in hashmap
                                 hashMap.put("email", email);
                                 hashMap.put("uid", uid);
-                                hashMap.put("name", name); //add later
-                                hashMap.put("phone", phone); //add later
+                                hashMap.put("name", ""); //add later
+                                hashMap.put("phone", ""); //add later
                                 hashMap.put("image", ""); //add later
-                                hashMap.put("emergency", emergency); //add later
+                                hashMap.put("emergency", ""); //add later
+                                hashMap.put("history", ""); //add later
 
                                 //firebase database instance
                                 FirebaseDatabase database = FirebaseDatabase.getInstance();

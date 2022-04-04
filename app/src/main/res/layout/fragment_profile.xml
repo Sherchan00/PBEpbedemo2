@@ -44,7 +44,6 @@
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
                    android:layout_marginStart="5dp"
-                   android:text="Name"
                    android:textColor="#FFFFFFFF"
                    android:layout_marginLeft="5dp"/>
 
@@ -53,7 +52,6 @@
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
                    android:layout_marginStart="5dp"
-                   android:text="Email"
                    android:textColor="#FFFFFFFF"
                    android:layout_marginLeft="5dp"/>
 
@@ -62,7 +60,6 @@
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
                    android:layout_marginStart="5dp"
-                   android:text="Phone"
                    android:textColor="#FFFFFFFF"
                    android:layout_marginLeft="5dp"/>
 
@@ -71,7 +68,6 @@
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
                    android:layout_marginStart="5dp"
-                   android:text="Emergency Contact"
                    android:textColor="#FFFFFFFF"
                    android:layout_marginLeft="5dp"/>
 
