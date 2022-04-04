@@ -30,7 +30,7 @@
         android:id="@+id/login_btn"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="100dp"
-        android:text="Register"
+        android:text="Login"
         style="@style/Base.Widget.AppCompat.Button.Colored"/>
 
 </RelativeLayout>
