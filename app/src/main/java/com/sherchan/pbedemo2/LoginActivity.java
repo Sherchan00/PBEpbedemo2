@@ -101,28 +101,37 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
 
-                            //get iser email and uid from auth
-                            String email = user.getEmail();
-                            String uid = user.getUid();
+                            //if user is signing in first time then get and show user info from google account
+                            if(task.getResult().getAdditionalUserInfo().isNewUser()){
+                                //get iser email and uid from auth
+                                String email = user.getEmail();
+                                String uid = user.getUid();
+                                String name = user.getDisplayName();
+                                String phone = user.getPhoneNumber();
+                                String emergency = user.getPhoneNumber();
 
-                            //using HashMap
-                            HashMap<Object, String> hashMap = new HashMap<>();
+                                //using HashMap
+                                HashMap<Object, String> hashMap = new HashMap<>();
 
-                            //put info in hashmap
-                            hashMap.put("email", email);
-                            hashMap.put("uid", uid);
-                            hashMap.put("name", ""); //add later
-                            hashMap.put("phone", ""); //add later
-                            hashMap.put("image", ""); //add later
+                                //put info in hashmap
+                                hashMap.put("email", email);
+                                hashMap.put("uid", uid);
+                                hashMap.put("name", name); //add later
+                                hashMap.put("phone", phone); //add later
+                                hashMap.put("image", ""); //add later
+                                hashMap.put("emergency", emergency); //add later
 
-                            //firebase database instance
-                            FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                //firebase database instance
+                                FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-                            //path to stoe user data named "Users"
-                            DatabaseReference reference = database.getReference("Users");
+                                //path to stoe user data named "Users"
+                                DatabaseReference reference = database.getReference("Users");
 
-                            //put data with hashmap in database
-                            reference.child(uid).setValue(hashMap);
+                                //put data with hashmap in database
+                                reference.child(uid).setValue(hashMap);
+                            }
+
+
                             startActivity(new Intent(LoginActivity.this, DashBoardActivity.class));
                             finish();
                         } else {

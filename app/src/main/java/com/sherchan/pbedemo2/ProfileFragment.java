@@ -2,11 +2,24 @@ package com.sherchan.pbedemo2;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +27,15 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class ProfileFragment extends Fragment {
+
+    FirebaseAuth firebaseAuth;
+    FirebaseUser user;
+    DatabaseReference databaseReference;
+    FirebaseDatabase firebaseDatabase;
+
+    //views from xml
+    ImageView avatarIv;
+    TextView nameTv, emailTv, phoneTv, emergencyTv, historyTv;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -53,12 +75,58 @@ public class ProfileFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        user = firebaseAuth.getCurrentUser();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference("Users");
+
+        //init views
+        avatarIv = view.findViewById(R.id.avatarIv);
+        emailTv = view.findViewById(R.id.emailTv);
+        nameTv = view.findViewById(R.id.nameTv);
+        phoneTv = view.findViewById(R.id.phoneTv);
+        emergencyTv = view.findViewById(R.id.emergencyTv);
+        historyTv = view.findViewById(R.id.historyTv);
+
+        Query query = databaseReference.orderByChild("email").equalTo(user.getEmail());
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                //check until required data get
+                for (DataSnapshot ds: dataSnapshot.getChildren()) {
+
+                    //get data
+                    String name = ""+ ds.child("name").getValue();
+                    String email = ""+ ds.child("email").getValue();
+                    String phone = ""+ ds.child("phone").getValue();
+                    String emergency = ""+ ds.child("emergency").getValue();
+                    String history = ""+ ds.child("history").getValue();
+
+                    //set data
+                    nameTv.setText(name);
+                    emailTv.setText(email);
+                    phoneTv.setText(phone);
+                    emergencyTv.setText(emergency);
+                    historyTv.setText(history);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        return view;
     }
 }
