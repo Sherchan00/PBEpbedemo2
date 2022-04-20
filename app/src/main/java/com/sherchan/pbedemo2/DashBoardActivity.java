@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,17 +34,14 @@ public class DashBoardActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
 
         //bottom naviogation
-        BottomNavigationView navigationView = findViewById(R.id.navigation);
+        BottomNavigationView navigationView = findViewById(R.id.bottom_navigation);
         navigationView.setOnNavigationItemSelectedListener(selectedListener);
 
         actionBar.setTitle("Home");
-        HomeFragment fragment1 =new HomeFragment();
+        HomeFragment fragment1 = new HomeFragment();
         FragmentTransaction ft1 = getSupportFragmentManager().beginTransaction();
-        ft1.replace(R.id.content, fragment1, "");
+        ft1.replace(R.id.main_container, fragment1, "");
         ft1.commit();
-
-        //init views
-       //mProfileTv = findViewById(R.id.profileTv);
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener selectedListener = new BottomNavigationView.OnNavigationItemSelectedListener( ){
@@ -56,17 +52,18 @@ public class DashBoardActivity extends AppCompatActivity {
                 case R.id.nav_home:
                     //home fragement transcation
                     actionBar.setTitle("Home");
-                    HomeFragment fragment1 =new HomeFragment();
+                  /*  HomeFragment fragment1 =new HomeFragment();
                     FragmentTransaction ft1 = getSupportFragmentManager().beginTransaction();
                     ft1.replace(R.id.content, fragment1, "");
-                    ft1.commit();
+                    ft1.commit();*/
+                    getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new HomeFragment()).commit();
                     return true;
                 case R.id.nav_profile:
                 //profile fragement transcation
-                    actionBar.setTitle("Home");
+                    actionBar.setTitle("Profile");
                     ProfileFragment fragment2 =new ProfileFragment();
                     FragmentTransaction ft2 = getSupportFragmentManager().beginTransaction();
-                    ft2.replace(R.id.content, fragment2, "");
+                    ft2.replace(R.id.main_container, fragment2, "");
                     ft2.commit();
                 return true;
             }
@@ -83,7 +80,7 @@ public class DashBoardActivity extends AppCompatActivity {
         }
         else {
             //User not signed in, go to main activity
-            startActivity(new Intent(DashBoardActivity.this, RegisterActivity.class));
+            startActivity(new Intent(DashBoardActivity.this, LoginActivity.class));
             finish();
         }
     }

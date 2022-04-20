@@ -13,6 +13,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.EditText;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -28,12 +32,19 @@ import androidx.annotation.NonNull;
 
 public class LoginActivity extends AppCompatActivity {
 
+    private static final int RC_SIGN_IN = 100;
+    GoogleSignInClient mGoogleSignInClient;
+
     //Views
     EditText mEmailEt, mPasswordEt;
     TextView notHavAccountTv;
     Button mLoginBtn;
+    SignInButton mGoogleLoginBtn;
 
     private FirebaseAuth mAuth;
+
+    private static final int REQ_ONE_TAP = 2;  // Can be any integer unique to the Activity.
+    private boolean showOneTapUI = true;
 
     //progress dialog
     ProgressDialog pd;
@@ -51,10 +62,16 @@ public class LoginActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
 
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(this,gso);
+
         mEmailEt = findViewById(R.id.emailEt);
         mPasswordEt = findViewById(R.id.passwordEt);
         notHavAccountTv= findViewById(R.id.nothave_accountTv);
         mLoginBtn = findViewById(R.id.loginBtn);
+        mGoogleLoginBtn = findViewById(R.id.googleLoginBtn);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -85,6 +102,16 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        //handle google login btn click
+       mGoogleLoginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //begin google login process
+                Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+                startActivityForResult(signInIntent, RC_SIGN_IN);
+            }
+        });
+
         //init progress dialog
         pd = new ProgressDialog(this);
         pd.setMessage("Logging In....");
@@ -103,7 +130,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             //if user is signing in first time then get and show user info from google account
                             if(task.getResult().getAdditionalUserInfo().isNewUser()){
-                                //get iser email and uid from auth
+                                //get user email and uid from auth
                                 String email = user.getEmail();
                                 String uid = user.getUid();
                                // String name = user.getDisplayName();
@@ -125,7 +152,7 @@ public class LoginActivity extends AppCompatActivity {
                                 //firebase database instance
                                 FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-                                //path to stoe user data named "Users"
+                                //path to store user data named "Users"
                                 DatabaseReference reference = database.getReference("Users");
 
                                 //put data with hashmap in database

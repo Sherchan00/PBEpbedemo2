@@ -29,7 +29,7 @@ import java.util.HashMap;
 public class RegisterActivity extends AppCompatActivity {
 
     //Views
-    EditText mEmailEt, mPasswordEt;
+    EditText mEmailEt, mPasswordEt, mNameEt, mPhoneEt, mEmergencyEt;
     Button mRegisterBtn;
     TextView mHaveAccountTv;
 
@@ -57,6 +57,9 @@ public class RegisterActivity extends AppCompatActivity {
         mPasswordEt = findViewById(R.id.passwordEt);
         mRegisterBtn = findViewById(R.id.registerBtn);
         mHaveAccountTv = findViewById(R.id.have_accountTv);
+        mNameEt = findViewById(R.id.nameEt);
+        mEmergencyEt = findViewById(R.id.emergencyEt);
+        mPhoneEt = findViewById(R.id.phoneEt);
 
         //Init Firebase Auth
         mAuth = FirebaseAuth.getInstance();
@@ -71,8 +74,11 @@ public class RegisterActivity extends AppCompatActivity {
         mRegisterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String name = mNameEt.getText().toString().trim();
                 String email = mEmailEt.getText().toString().trim();
                 String password = mPasswordEt.getText().toString().trim();
+                String phone = mPhoneEt.getText().toString().trim();
+                String emergency = mEmergencyEt.getText().toString().trim();
 
                 //validate
                 if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
@@ -84,8 +90,23 @@ public class RegisterActivity extends AppCompatActivity {
                     mPasswordEt.setError("Password length less than 6");
                     mPasswordEt.setFocusable(true);
                 }
+                else if(name.isEmpty()){
+                    mNameEt.setError("TextField is required");
+                    mNameEt.setFocusable(true);
+
+                }
+                else if(phone.isEmpty() || phone.length()<10){
+                    mPhoneEt.setError("Invalid TextField");
+                    mPhoneEt.setFocusable(true);
+
+                }
+                else if(emergency.isEmpty() || emergency.length()<10){
+                    mEmergencyEt.setError("Invalid TextField");
+                    mEmergencyEt.setFocusable(true);
+
+                }
                 else {
-                    registerUser(email, password);
+                    registerUser(name, email, password, phone, emergency);
                 }
 
             }
@@ -100,7 +121,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    private void registerUser(String email, String password){
+    private void registerUser(String name, String email, String password, String phone, String emergency){
         //email and password pattern is valid, show progress dialog and start registering user
         progressDialog.show();
 
@@ -115,21 +136,25 @@ public class RegisterActivity extends AppCompatActivity {
 
                             String email = user.getEmail();
                             String uid = user.getUid();
+                            String name = mNameEt.getText().toString();
+                            String phone = mPhoneEt.getText().toString();
+                            String emergency = mEmergencyEt.getText().toString();
 
                             //using HashMap
                             HashMap<Object, String> hashMap = new HashMap<>();
 
                             //put info in hashmap
+                            hashMap.put("name", name);
                             hashMap.put("email", email);
                             hashMap.put("uid", uid);
-                            hashMap.put("name", ""); //add later
-                            hashMap.put("phone", ""); //add later
+                            hashMap.put("phone", phone);
+                            hashMap.put("emergency", emergency);
                             hashMap.put("image", ""); //add later
 
                             //firebase database instance
                             FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-                            //path to stoe user data named "Users"
+                            //path to store user data named "Users"
                             DatabaseReference reference = database.getReference("Users");
 
                             //put data with hashmap in database

@@ -3,6 +3,7 @@
     <string name="register">Register</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
+    <!--  <string name="default_web_client_id">437206478951-7ocsd3t03glbqleq2958m6hsmsnvil2j.apps.googleusercontent.com</string> -->
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

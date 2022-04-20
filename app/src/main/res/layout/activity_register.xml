@@ -17,6 +17,26 @@
         android:textSize="25sp"/>
 
     <!-- TextView: Input Email-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:id="@+id/nameTIL"
+        android:layout_above="@id/emailTIL"
+        >
+
+        <EditText
+            android:id="@+id/nameEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Full Name"
+            android:inputType="textPersonName"
+            tools:ignore="SpeakableTextPresentCheck,DuplicateClickableBoundsCheck"
+            android:importantForAutofill="no" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- TextView: Input Email-->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -56,12 +76,50 @@
 />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:id="@+id/phoneTIL"
+        android:layout_below="@id/passwordTIL"
+        >
+
+        <EditText
+            android:id="@+id/phoneEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Phone Number"
+            android:inputType="phone"
+            tools:ignore="SpeakableTextPresentCheck,DuplicateClickableBoundsCheck"
+            android:importantForAutofill="no" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:id="@+id/emergencyTIL"
+        android:layout_below="@id/phoneTIL"
+        >
+
+        <EditText
+            android:id="@+id/emergencyEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Emergency Contact"
+            android:inputType="phone"
+            tools:ignore="SpeakableTextPresentCheck,DuplicateClickableBoundsCheck"
+            android:importantForAutofill="no" />
+    </com.google.android.material.textfield.TextInputLayout>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/registerBtn"
         android:text="Register"
-        android:layout_below="@id/passwordTIL"
+        android:layout_below="@id/emergencyTIL"
         android:layout_centerHorizontal="true"
         style="@style/Base.Widget.AppCompat.Button.Colored"/>
 

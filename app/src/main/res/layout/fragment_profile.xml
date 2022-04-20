@@ -4,85 +4,105 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F1EDED"
-    tools:context=".ProfileFragment">
+    tools:context=".ProfileFragment"
+    android:id="@+id/p">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
    <RelativeLayout
        android:layout_width="match_parent"
-       android:layout_height="180dp"
+       android:layout_height="300dp"
+       android:padding="20dp"
        android:background="@color/design_default_color_primary">
 
-       <RelativeLayout
-           android:layout_width="match_parent"
-           android:layout_height="180dp"
-           android:background="@color/design_default_color_primary_dark">
+       <ImageView
+           android:id="@+id/avatarIv"
+           android:layout_width="100dp"
+           android:layout_height="100dp"
+           android:layout_centerVertical="true"
+           android:src="@drawable/ic_add_image"
+           android:background="@color/design_default_color_primary_dark"/>
 
-       </RelativeLayout>
-
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:layout_height="120dp"
-           android:orientation="horizontal"
-           android:layout_marginTop="100dp">
-
-           <ImageView
-               android:layout_width="120dp"
-               android:layout_height="120dp"
-               android:id="@+id/avatarIv"
-               android:src="@drawable/ic_add_image"
-               android:layout_marginStart="20dp"
-               android:padding="5dp"
-               android:background="@color/design_default_color_primary"
-               android:layout_marginLeft="20dp"/>
-
-
-           <LinearLayout
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:orientation="vertical">
                <TextView
                    android:id="@+id/nameTv"
-                   android:layout_width="match_parent"
+                   android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
-                   android:layout_marginStart="5dp"
-                   android:textColor="#FFFFFFFF"
-                   android:layout_marginLeft="5dp"/>
+                   android:text=""
+                   android:textSize="20sp"
+                   android:layout_toRightOf="@+id/avatarIv"
+                   android:layout_centerVertical="true"
+                   android:includeFontPadding="false"
+                   android:layout_marginLeft="10dp"/>
 
-               <TextView
-                   android:id="@+id/emailTv"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:layout_marginStart="5dp"
-                   android:textColor="#FFFFFFFF"
-                   android:layout_marginLeft="5dp"/>
+   </RelativeLayout>
 
-               <TextView
-                   android:id="@+id/phoneTv"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:layout_marginStart="5dp"
-                   android:textColor="#FFFFFFFF"
-                   android:layout_marginLeft="5dp"/>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp"
+    android:orientation="vertical"
+    android:id="@+id/l1">
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email">
 
-               <TextView
-                   android:id="@+id/emergencyTv"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:layout_marginStart="5dp"
-                   android:textColor="#FFFFFFFF"
-                   android:layout_marginLeft="5dp"/>
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/emailTv">
 
-               <TextView
-                   android:id="@+id/historyTv"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:layout_marginStart="5dp"
-                   android:text="History"
-                   android:textColor="#FFFFFFFF"
-                   android:layout_marginLeft="5dp"/>
-       </LinearLayout>
+        </com.google.android.material.textfield.TextInputEditText>
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Phone">
 
-   </LinearLayout>
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/phoneTv">
 
-</RelativeLayout>
+        </com.google.android.material.textfield.TextInputEditText>
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Emergency Contact">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/emergencyTv">
+
+        </com.google.android.material.textfield.TextInputEditText>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/historyTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:text="Fall History"
+        android:textColor="#FFFFFFFF"
+        />
+
+    <Button
+        android:id="@+id/update"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:text="Update"
+        android:textColor="#FFFFFFFF"/>
+
+    </LinearLayout>
+    </LinearLayout>
 
 </ScrollView>
