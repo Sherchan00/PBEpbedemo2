@@ -52,18 +52,21 @@ public class DashBoardActivity extends AppCompatActivity {
                 case R.id.nav_home:
                     //home fragement transcation
                     actionBar.setTitle("Home");
-                  /*  HomeFragment fragment1 =new HomeFragment();
-                    FragmentTransaction ft1 = getSupportFragmentManager().beginTransaction();
-                    ft1.replace(R.id.content, fragment1, "");
-                    ft1.commit();*/
                     getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new HomeFragment()).commit();
                     return true;
+
+                case R.id.nav_fallHistory:
+                    actionBar.setTitle("Profile");
+                    FragmentTransaction ft3 = getSupportFragmentManager().beginTransaction();
+                    ft3.replace(R.id.main_container, new FallHistory(), "");
+                    ft3.commit();
+                    return true;
+
                 case R.id.nav_profile:
                 //profile fragement transcation
                     actionBar.setTitle("Profile");
-                    ProfileFragment fragment2 =new ProfileFragment();
                     FragmentTransaction ft2 = getSupportFragmentManager().beginTransaction();
-                    ft2.replace(R.id.main_container, fragment2, "");
+                    ft2.replace(R.id.main_container, new ProfileFragment(), "");
                     ft2.commit();
                 return true;
             }
@@ -79,7 +82,7 @@ public class DashBoardActivity extends AppCompatActivity {
             //mProfileTv.setText((user.getEmail()));
         }
         else {
-            //User not signed in, go to main activity
+            //User not signed in, go to Main Activity
             startActivity(new Intent(DashBoardActivity.this, LoginActivity.class));
             finish();
         }

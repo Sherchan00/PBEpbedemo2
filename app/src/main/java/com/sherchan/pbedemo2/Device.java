@@ -7,9 +7,6 @@ public class Device {
     String currentDate;
     String uid;
 
-    public void Device(){
-
-    }
 
     public String getDeviceId() {
         return deviceId;
@@ -31,7 +28,11 @@ public class Device {
         return uid;
     }
 
-    public Device(String deviceId, String fallStatus, String currentTime, String currentDate, String uid) {
+    public Device() {
+
+    }
+
+    public Device(String deviceId, String fallStatus, String currentTime, String currentDate,  String uid) {
         this.deviceId = deviceId;
         this.fallStatus = fallStatus;
         this.currentTime = currentTime;

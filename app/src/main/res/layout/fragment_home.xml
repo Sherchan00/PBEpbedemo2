@@ -3,57 +3,61 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#7DD3E8"
     tools:context=".HomeFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <RelativeLayout
+        android:id="@+id/lay"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:id="@+id/lay"
         android:layout_marginLeft="100dp"
         android:layout_marginTop="70dp"
         android:textAlignment="center">
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/mFall"
-        android:layout_gravity="center"
-        android:text="Push"
-        android:textSize="20sp"
-        android:textAlignment="center"
-        android:textStyle="bold"/>
+
         <Button
+            android:id="@+id/mFall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Push"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Button
             android:id="@+id/bOn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/mFall"
             android:layout_gravity="center"
             android:text="Bluetooth On"
-            android:textSize="20sp"
             android:textAlignment="center"
-            android:textStyle="bold"/>
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
         <Button
+            android:id="@+id/bOff"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/bOff"
             android:layout_below="@id/bOn"
             android:layout_gravity="center"
             android:text="Bluetooth Off"
-            android:textSize="20sp"
             android:textAlignment="center"
-            android:textStyle="bold"/>
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <Button
+            android:id="@+id/pairedDevices"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/pairedDevices"
-            android:layout_gravity="center"
             android:layout_below="@+id/bOff"
+            android:layout_gravity="center"
             android:text="Paired Devices"
             android:textSize="20sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
-    <Button
+        <!--<Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/connect"
@@ -63,11 +67,31 @@
         android:textSize="20sp"
         android:textStyle="bold"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/t1"
+            android:layout_below="@+id/connect"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="lon"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/t2"
+            android:layout_below="@+id/t1"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="lat"
+            /> -->
+
+
     </RelativeLayout>
 
     <ListView
+        android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="300dp"
-        android:id="@+id/list"/>
+        android:layout_marginTop="300dp" />
 </FrameLayout>
